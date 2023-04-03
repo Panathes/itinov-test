@@ -51,6 +51,10 @@ const TitleWrapper = styled.div`
   flex-direction: row;
 `
 
+const Amount = styled.p<{ isExpense: boolean }>`
+    color: ${props => props.isExpense ? '#ff1b1c' : '#87ff65'}
+`;
+
 const Card = ({ title, numberAccount, accountBalance,onClick }: CardProps) => {
   return (
     <CardWrapper onClick={onClick}>
@@ -59,7 +63,7 @@ const Card = ({ title, numberAccount, accountBalance,onClick }: CardProps) => {
             <Logo src={wallet} alt="Logout Logo" />
             <CardTitle><b>{title}</b></CardTitle>
         </TitleWrapper>
-      <p>{accountBalance} €</p>
+        <Amount isExpense={accountBalance < 0}>{accountBalance} €</Amount>
       </Wrapper>
       <CardDescription>{numberAccount}</CardDescription>
     </CardWrapper>

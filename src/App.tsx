@@ -1,7 +1,11 @@
 import 'bulma/css/bulma.min.css';
-import React from 'react';
 import Homepage from './page/Homepage';
 import Operations from './page/Operations';
+import Transaction from './page/Transaction';
+import Context from './context';
+import { fakeData } from './asset/fakeData';
+
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -15,12 +19,18 @@ const router = createBrowserRouter([
   {
     path: "/operations",
     element: <Operations />,
+  },
+  {
+    path: "/transfert",
+    element: <Transaction />,
   }
 ]);
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <Context.Provider value={fakeData}>
+      <RouterProvider router={router} />
+    </Context.Provider>
   );
 }
 
