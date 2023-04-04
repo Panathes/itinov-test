@@ -1,14 +1,15 @@
 import React from "react";
 import styled from 'styled-components';
 
-interface Transaction  {
+export interface Transaction  {
+    id: number;
     date: string;
     wording: string;
     amount: number
-}
+} 
 
 interface Props {
-    transactions: Transaction[];
+    transactions: Transaction[] | undefined;
 }
 
 const Wrapper = styled.div`
@@ -32,8 +33,8 @@ const TransactionTable = ({transactions}: Props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {transactions.map(transaction => (
-                        <tr>
+                        {transactions?.map(transaction => (
+                        <tr key={transaction.id}>
                         <td>{transaction.date}</td>
                         <td><b>{transaction.wording}</b></td>
                         <td><Amount isExpense={transaction.amount < 0}>{transaction.amount} €</Amount></td>

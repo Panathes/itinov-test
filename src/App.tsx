@@ -11,22 +11,23 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Homepage />,
-  },
-  {
-    path: "/operations",
-    element: <Operations />,
-  },
-  {
-    path: "/transfert",
-    element: <Transaction />,
-  }
-]);
+
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Homepage />,
+    },
+    {
+      path: "/operations/:id",
+      element: <Operations />,
+    },
+    {
+      path: "/transfert",
+      element: <Transaction />,
+    }
+  ]);
   return (
     <Context.Provider value={fakeData}>
       <RouterProvider router={router} />

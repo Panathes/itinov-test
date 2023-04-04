@@ -1,12 +1,15 @@
 import 'bulma/css/bulma.min.css';
-import React from "react";
+import React, { useState } from "react";
 import Header from '../../components/Header';
 import styled from 'styled-components';
 import Card from '../../components/Card';
+import { fakeData } from '../../asset/fakeData';
+import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.div`
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin-top: 20px;
 `
 
@@ -17,22 +20,28 @@ const Title = styled.h1`
     font-size: 48px;
 `
 
-const handleClick = () => {
-    console.log('Card clicked');
-  };
-
 const Homepage = () => {
+    const [cardInformations] = useState(fakeData);
+    const navigate = useNavigate();
+
+    const handleClick = (number: string) => {
+        navigate(`/operations/${number}`)
+      };
+
     return (
         <React.Fragment>
             <Header />
             <Title><b>Mes comptes</b></Title>
             <Wrapper>
-                <Card
-                title="Compte Bancaire"
-                numberAccount="N° 123456789"
-                onClick={handleClick}
-                accountBalance={50000}
-                />
+                {cardInformations.map(cardInformation => (
+                    <Card
+                        key={cardInformation.id}
+                        title={cardInformation.nameAccount}
+                        numberAccount={cardInformation.numberAccount}
+                        onClick={() => handleClick(cardInformation.numberAccount)}
+                        accountBalance={cardInformation.balanceAccount}
+                    />
+                ))}
             </Wrapper>
         </React.Fragment>    
     )

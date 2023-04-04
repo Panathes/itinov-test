@@ -1,11 +1,12 @@
 import 'bulma/css/bulma.min.css';
-import React from "react";
+import React,{ useState } from "react";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styled from 'styled-components'
+import { fakeData } from '../../asset/fakeData';
 
 export interface TransferFormData {
-    recipientName: string;
-    accountNumber: string;
+    firstAccount: string;
+    secondAccount: string;
     amount: number;
   }
   
@@ -40,12 +41,20 @@ const TransactionForm = ({onSubmit}: TransferProps) => {
     return (
         <Form onSubmit={handleSubmit(submitHandler)}>
         <label>Depuis quelle compte ?</label>
-        <Input {...register('recipientName', { required: true })} />
-        {errors.recipientName && <span>Champs requis</span>}
+        <select {...register("firstAccount")}>
+            <option value="0">0 - 1</option>
+            <option value="1">1 - 100</option>
+        </select>
+        {errors.firstAccount && <span>Champs requis</span>} 
   
-        <label>Vers quelle compte ?</label>
-        <Input {...register('accountNumber', { required: true })} />
-        {errors.accountNumber && <span>Champs requis</span>}
+        <div className='select'>
+            <label>Vers quelle compte ?</label>
+            <select {...register("secondAccount")}>
+                <option value="0">0 - 1</option>
+                <option value="1">1 - 100</option>
+            </select>
+            {errors.secondAccount && <span>Champs requis</span>} 
+        </div>
   
         <label>Quelle montant ?</label>
         <Input type="number" {...register('amount', { required: true, min: 0 })} />
