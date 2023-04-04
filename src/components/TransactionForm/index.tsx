@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { fakeData } from '../../asset/fakeData';
 
 export interface TransferFormData {
+    find: any;
     firstAccount: string;
     secondAccount: string;
     amount: number;
@@ -34,6 +35,7 @@ export interface TransferFormData {
 
 const TransactionForm = ({onSubmit}: TransferProps) => {
     const { register, handleSubmit, formState: { errors } } = useForm<TransferFormData>();
+    const [ accounts ] = useState(fakeData);
     const submitHandler: SubmitHandler<TransferFormData> = data => {
       onSubmit(data);
     };
@@ -42,19 +44,23 @@ const TransactionForm = ({onSubmit}: TransferProps) => {
         <Form onSubmit={handleSubmit(submitHandler)}>
         <label>Depuis quelle compte ?</label>
         <select {...register("firstAccount")}>
-            <option value="0">0 - 1</option>
-            <option value="1">1 - 100</option>
+        {accounts.map( account => (
+            <option value={account.nameAccount} key={account.id}>
+                {account.nameAccount} / {account.balanceAccount} €
+            </option>
+        ))}
         </select>
         {errors.firstAccount && <span>Champs requis</span>} 
   
-        <div className='select'>
-            <label>Vers quelle compte ?</label>
-            <select {...register("secondAccount")}>
-                <option value="0">0 - 1</option>
-                <option value="1">1 - 100</option>
-            </select>
-            {errors.secondAccount && <span>Champs requis</span>} 
-        </div>
+        <label>Vers quelle compte ?</label>
+        <select {...register("secondAccount")}>
+        {accounts.map( account => (
+            <option value={account.nameAccount} key={account.id}>
+                {account.nameAccount} / {account.balanceAccount} €
+            </option>
+        ))}
+        </select>
+        {errors.secondAccount && <span>Champs requis</span>} 
   
         <label>Quelle montant ?</label>
         <Input type="number" {...register('amount', { required: true, min: 0 })} />
