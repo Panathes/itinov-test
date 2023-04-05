@@ -1,10 +1,11 @@
 import 'bulma/css/bulma.min.css';
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from 'styled-components'
 import Header from '../../components/Header';
 import TransactionTable from '../../components/TransactionTable';
-import { fakeData } from '../../asset/fakeData';
 import { useParams } from 'react-router-dom';
+import CurrentUserAccounts from '../../context';
+
 
 const Title = styled.h1`
     display: flex;
@@ -15,10 +16,9 @@ const Title = styled.h1`
 
 
 const Operations = () => {
-    const [data] = useState(fakeData);
-    // const [operationsList] = useRef(data.find((item: { numberAccount: any; }) => item.numberAccount === userNumberAccount.id)?.operationAccount)
+    const data = useContext(CurrentUserAccounts)
     let  userNumberAccount  = useParams();
-    const operationsList = data.find((item: { numberAccount: any; }) => item.numberAccount === userNumberAccount.id)?.operationAccount
+    const operationsList = data?.find((item: { numberAccount: any; }) => item.numberAccount === userNumberAccount.id)?.operationAccount
 
     return (
         <React.Fragment>

@@ -1,5 +1,18 @@
-import {createContext } from 'react';
+import { createContext } from 'react';
 
-const Context = createContext({})
+export interface Account {
+    id: number;
+    nameAccount: string;
+    numberAccount: string;
+    balanceAccount: number;
+    operationAccount: {
+        id: number;
+        date: string;
+        wording: string;
+        amount: number;
+    }[]
+}
 
-export default Context;
+const CurrentUserAccounts = createContext<Account[] | null>(null)
+
+export default CurrentUserAccounts;

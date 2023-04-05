@@ -1,9 +1,11 @@
 import 'bulma/css/bulma.min.css';
+import { useState } from 'react';
 import Homepage from './page/Homepage';
 import Operations from './page/Operations';
 import Transaction from './page/Transaction';
-import Context from './context';
+import CurrentUserAccounts from './context';
 import { fakeData } from './asset/fakeData';
+import { Account } from './context';
 
 
 import {
@@ -13,7 +15,8 @@ import {
 
 
 
-function App() {
+const App = () =>  {
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -29,9 +32,9 @@ function App() {
     }
   ]);
   return (
-    <Context.Provider value={fakeData}>
+    <CurrentUserAccounts.Provider value={fakeData}>
       <RouterProvider router={router} />
-    </Context.Provider>
+    </CurrentUserAccounts.Provider>
   );
 }
 

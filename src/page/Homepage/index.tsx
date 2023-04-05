@@ -1,10 +1,10 @@
 import 'bulma/css/bulma.min.css';
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Header from '../../components/Header';
 import styled from 'styled-components';
 import Card from '../../components/Card';
-import { fakeData } from '../../asset/fakeData';
 import { useNavigate } from 'react-router-dom';
+import CurrentUserAccounts from '../../context';
 
 const Wrapper = styled.div`
     display: flex;
@@ -21,7 +21,7 @@ const Title = styled.h1`
 `
 
 const Homepage = () => {
-    const [cardInformations] = useState(fakeData);
+    const cardInformations = useContext(CurrentUserAccounts)
     const navigate = useNavigate();
 
     const handleClick = (number: string) => {
@@ -33,7 +33,7 @@ const Homepage = () => {
             <Header />
             <Title><b>Mes comptes</b></Title>
             <Wrapper>
-                {cardInformations.map(cardInformation => (
+                {cardInformations?.map(cardInformation => (
                     <Card
                         key={cardInformation.id}
                         title={cardInformation.nameAccount}

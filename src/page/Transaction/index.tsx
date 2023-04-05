@@ -1,8 +1,8 @@
 import 'bulma/css/bulma.min.css';
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from 'styled-components';
-import { fakeData } from '../../asset/fakeData';
-
+import CurrentUserAccounts from '../../context';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import TransactionForm from '../../components/TransactionForm';
 import { TransferFormData } from '../../components/TransactionForm';
@@ -21,14 +21,16 @@ const Title = styled.h1`
 `
 
 const Transaction = () => {
-    const [accountList] = useState(fakeData)
+    // const [accountList] = useState(fakeData)
+    const accountList = useContext(CurrentUserAccounts)
+    const navigate = useNavigate();
     const handleTransfer = (data: TransferFormData) => {
         console.log('Transfer data:', data);
-        const creditAccount = accountList.find((item: { nameAccount: any; }) => item.nameAccount === data.firstAccount);
-        const debitAccount = accountList.find((item: { nameAccount: any; }) => item.nameAccount === data.secondAccount);
+        const creditAccount = accountList?.find((item: { nameAccount: any; }) => item.nameAccount === data.firstAccount);
+        const debitAccount = accountList?.find((item: { nameAccount: any; }) => item.nameAccount === data.secondAccount);
 
         // eslint-disable-next-line array-callback-return
-        accountList.map(account => {
+        accountList?.map(account => {
             if (account.nameAccount === creditAccount?.nameAccount ) {
                 return account.balanceAccount = account.balanceAccount - data.amount
             }
@@ -36,7 +38,7 @@ const Transaction = () => {
                 return account.balanceAccount +=  Number(data.amount)
             }
         })
-
+        navigate(`/`)
       }; 
 
     return (
