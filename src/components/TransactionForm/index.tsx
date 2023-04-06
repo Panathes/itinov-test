@@ -1,8 +1,8 @@
 import 'bulma/css/bulma.min.css';
-import React,{ useState } from "react";
+import { useContext } from "react";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styled from 'styled-components'
-import { fakeData } from '../../asset/fakeData';
+import CurrentUserAccounts from '../../context';
 
 export interface TransferFormData {
     find: any;
@@ -35,7 +35,7 @@ export interface TransferFormData {
 
 const TransactionForm = ({onSubmit}: TransferProps) => {
     const { register, handleSubmit, formState: { errors } } = useForm<TransferFormData>();
-    const [ accounts ] = useState(fakeData);
+    const cardInformations = useContext(CurrentUserAccounts)
     const submitHandler: SubmitHandler<TransferFormData> = data => {
       onSubmit(data);
     };
@@ -44,7 +44,7 @@ const TransactionForm = ({onSubmit}: TransferProps) => {
         <Form onSubmit={handleSubmit(submitHandler)}>
         <label>Depuis quelle compte ?</label>
         <select {...register("firstAccount")}>
-        {accounts.map( account => (
+        {cardInformations?.map( account => (
             <option value={account.nameAccount} key={account.id}>
                 {account.nameAccount} / {account.balanceAccount} €
             </option>
@@ -54,7 +54,7 @@ const TransactionForm = ({onSubmit}: TransferProps) => {
   
         <label>Vers quelle compte ?</label>
         <select {...register("secondAccount")}>
-        {accounts.map( account => (
+        {cardInformations?.map( account => (
             <option value={account.nameAccount} key={account.id}>
                 {account.nameAccount} / {account.balanceAccount} €
             </option>

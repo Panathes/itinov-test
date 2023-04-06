@@ -21,11 +21,9 @@ const Title = styled.h1`
 `
 
 const Transaction = () => {
-    // const [accountList] = useState(fakeData)
     const accountList = useContext(CurrentUserAccounts)
     const navigate = useNavigate();
     const handleTransfer = (data: TransferFormData) => {
-        console.log('Transfer data:', data);
         const creditAccount = accountList?.find((item: { nameAccount: any; }) => item.nameAccount === data.firstAccount);
         const debitAccount = accountList?.find((item: { nameAccount: any; }) => item.nameAccount === data.secondAccount);
 

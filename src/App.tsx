@@ -1,11 +1,9 @@
 import 'bulma/css/bulma.min.css';
-import { useState } from 'react';
 import Homepage from './page/Homepage';
 import Operations from './page/Operations';
 import Transaction from './page/Transaction';
 import CurrentUserAccounts from './context';
 import { fakeData } from './asset/fakeData';
-import { Account } from './context';
 
 
 import {
