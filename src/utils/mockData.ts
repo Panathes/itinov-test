@@ -1,4 +1,4 @@
-export const fakeData = [
+export const mockData = [
     {
         id: 1,
         nameAccount: "CCP",

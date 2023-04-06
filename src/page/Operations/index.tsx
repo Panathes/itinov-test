@@ -14,7 +14,6 @@ const Title = styled.h1`
     font-size: 48px;
 `
 
-
 const Operations = () => {
     const data = useContext(CurrentUserAccounts)
     let  userNumberAccount  = useParams();
