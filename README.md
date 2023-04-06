@@ -50,3 +50,7 @@ Après la réalisation du test, j'ai pu remarqué que par moment, malgré le use
 ## Storybook
 
 J'ai hésité à mettre en place un storybook pour montrer l'utilisation des composants de l'application. Je peux le réaliser si demandé.
+
+## Formulaire de virement
+
+Un point améliorable serait de rajouter certaines vérification (rendre impossible le choix du même compte comme créditeur et débiteur).
