@@ -1,8 +1,11 @@
 import 'bulma/css/bulma.min.css';
-import React from "react";
+import React, { useContext } from "react";
 import styled from 'styled-components'
 import Header from '../../components/Header';
 import TransactionTable from '../../components/TransactionTable';
+import { useParams } from 'react-router-dom';
+import CurrentUserAccounts from '../../context';
+
 
 const Title = styled.h1`
     display: flex;
@@ -11,21 +14,17 @@ const Title = styled.h1`
     font-size: 48px;
 `
 
-const transactions = [
-    { id: 1, date: '2022-01-01', wording: 'Paycheck', amount: 5000 },
-    { id: 2, date: '2022-01-05', wording: 'Rent', amount: -1000 },
-    { id: 3, date: '2022-01-10', wording: 'Groceries', amount: -200 },
-    { id: 4, date: '2022-01-15', wording: 'Dinner with friends', amount: -100 },
-    { id: 5, date: '2022-01-20', wording: 'Gas', amount: -50 },
-  ];
-
 
 const Operations = () => {
+    const data = useContext(CurrentUserAccounts)
+    let  userNumberAccount  = useParams();
+    const operationsList = data?.find((item: { numberAccount: any; }) => item.numberAccount === userNumberAccount.id)?.operationAccount
+
     return (
         <React.Fragment>
             <Header />
             <Title><b>Opérations</b></Title>
-            <TransactionTable transactions={transactions}/>
+            <TransactionTable transactions={operationsList}/>
         </React.Fragment>
     )
 }

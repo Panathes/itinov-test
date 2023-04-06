@@ -4,7 +4,7 @@ import logout from '../../asset/logout.png';
 import styled from 'styled-components';
 
 const HeaderWrapper = styled.div`
-    height: 111px;
+    height: 121px;
     width: 100%;
     background-color: #171D44;
     color: #FFF;
@@ -34,6 +34,16 @@ const Logo = styled.img`
     max-height: 20px;
     margin-right: 8px;
 `
+const LinkHeader = styled.div`
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+`
+
+const Link = styled.a`
+    color: #FFF;
+    border-color: white;
+`
 
 const Header = () => {
     return (
@@ -47,6 +57,10 @@ const Header = () => {
                 <Logo src={logout} alt="Logout Logo" />
             </ProfileWrapper>
         </HeaderElementWrapper>
+        <LinkHeader>
+            <Link href="/">Comptes</Link>
+            <Link href="/transfert">Virement</Link>
+        </LinkHeader>
         </HeaderWrapper>
     </React.Fragment>
     )

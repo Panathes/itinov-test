@@ -1,11 +1,13 @@
 import 'bulma/css/bulma.min.css';
-import React from "react";
+import { useContext } from "react";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styled from 'styled-components'
+import CurrentUserAccounts from '../../context';
 
 export interface TransferFormData {
-    recipientName: string;
-    accountNumber: string;
+    find: any;
+    firstAccount: string;
+    secondAccount: string;
     amount: number;
   }
   
@@ -33,6 +35,7 @@ export interface TransferFormData {
 
 const TransactionForm = ({onSubmit}: TransferProps) => {
     const { register, handleSubmit, formState: { errors } } = useForm<TransferFormData>();
+    const cardInformations = useContext(CurrentUserAccounts)
     const submitHandler: SubmitHandler<TransferFormData> = data => {
       onSubmit(data);
     };
@@ -40,12 +43,24 @@ const TransactionForm = ({onSubmit}: TransferProps) => {
     return (
         <Form onSubmit={handleSubmit(submitHandler)}>
         <label>Depuis quelle compte ?</label>
-        <Input {...register('recipientName', { required: true })} />
-        {errors.recipientName && <span>Champs requis</span>}
+        <select {...register("firstAccount")}>
+        {cardInformations?.map( account => (
+            <option value={account.nameAccount} key={account.id}>
+                {account.nameAccount} / {account.balanceAccount} €
+            </option>
+        ))}
+        </select>
+        {errors.firstAccount && <span>Champs requis</span>} 
   
         <label>Vers quelle compte ?</label>
-        <Input {...register('accountNumber', { required: true })} />
-        {errors.accountNumber && <span>Champs requis</span>}
+        <select {...register("secondAccount")}>
+        {cardInformations?.map( account => (
+            <option value={account.nameAccount} key={account.id}>
+                {account.nameAccount} / {account.balanceAccount} €
+            </option>
+        ))}
+        </select>
+        {errors.secondAccount && <span>Champs requis</span>} 
   
         <label>Quelle montant ?</label>
         <Input type="number" {...register('amount', { required: true, min: 0 })} />
