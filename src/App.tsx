@@ -3,7 +3,7 @@ import Homepage from './page/Homepage';
 import Operations from './page/Operations';
 import Transaction from './page/Transaction';
 import CurrentUserAccounts from './context';
-import { fakeData } from './asset/fakeData';
+import { mockData } from './utils/mockData';
 
 
 import {
@@ -30,7 +30,7 @@ const App = () =>  {
     }
   ]);
   return (
-    <CurrentUserAccounts.Provider value={fakeData}>
+    <CurrentUserAccounts.Provider value={mockData}>
       <RouterProvider router={router} />
     </CurrentUserAccounts.Provider>
   );

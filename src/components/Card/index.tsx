@@ -6,7 +6,7 @@ interface CardProps {
     title: string;
     numberAccount: string; 
     accountBalance: number;
-    onClick: MouseEventHandler<HTMLDivElement>;
+    onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 const CardWrapper = styled.div`
