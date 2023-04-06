@@ -32,7 +32,7 @@ const ITINOVBrand = styled.img`
 const Logo = styled.img`
     width: auto;
     max-height: 20px;
-    margin-right: 8px;
+    margin-right: 20px;
 `
 const LinkHeader = styled.div`
     margin-top: 15px;
